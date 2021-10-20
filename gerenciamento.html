@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Bootstrap 4 JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Icones -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif
+}
+
+body {
+    background-color: #f8f8f8
+}
+
+.container {
+    margin-top: 5px;
+    padding: 40px 20px
+}
+
+.box {
+    padding: 40px 30px;
+    transition: all .4s ease-in-out;
+    cursor: pointer
+}
+
+.box:hover {
+    box-shadow: 2px 2px 10px #a5a5a5;
+    transform: scale(1.03)
+}
+
+a:hover {
+    text-decoration: none
+}
+
+img {
+    object-fit: contain;
+    width: 35px;
+    height: 35px
+}
+
+p.text-muted {
+    margin: 0;
+    font-size: 0.9rem
+}
+
+b {
+    font-size: 1.12rem
+}
+
+.rounded-circle {
+    width: 60px;
+    height: 60px;
+    background-color: red
+}
+
+.blue {
+    background-color: #bedcfa;
+    transform: rotateZ(90deg)
+}
+
+.pale-blue {
+    background-color: #eff8ff
+}
+
+.pale-orange {
+    background-color: #ffe5b9
+}
+
+.pale-purple {
+    background-color: #e8e8e8
+}
+
+.pale-cyan {
+    background-color: #cffffe
+}
+
+.pale-pink {
+    background-color: #ffe4e4
+}
+
+.pale-pale {
+    background-color: #f4eeff
+}
+
+.pale-green {
+    background-color: #a0ffe6
+}
+
+.pale-pista {
+    background-color: #dbf6e9
+}
+@media screen and (max-width: 800px) {
+    .box {
+    padding: 40px 30px;
+    box-shadow: 2px 2px 10px #a5a5a5;
+    cursor: pointer
+    }
+    .box:hover {
+    transform:none;
+    }
+}
+    </style>
+
+    <link rel="shortcut icon" href="Terno.ico" type="image/x-icon">
+    <title>Gerenciamento</title>
+</head>
+<body>
+    <div class="container bg-light rounded">
+        <div class="h4 font-weight-bold text-center py-1">Gerenciamento</div>
+        <div class="row">
+            <!-- Usa div como botão -->
+            <script type="text/javascript">
+                function abrir(pagina) {
+                    window.open(pagina, '_self');
+                }
+            </script>
+
+            <div class="col-lg-4 col-md-6 my-lg-0 my-3" onclick="abrir('relatorios.php')">
+                <div class="box bg-white">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle mx-3 text-center d-flex align-items-center justify-content-center blue">
+                            <img src="https://image.flaticon.com/icons/png/512/5365/5365939.png" alt="">
+                        </div>
+                        <div class="d-flex flex-column"> <b>Relatórios</b> <a href="#">
+                                <p class="text-muted">de Serviço de Campo</p>
+                            </a> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 my-lg-0 my-3" onclick="abrir('designacoes_editar.php')">
+                <div class="box bg-white">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle mx-3 d-flex align-items-center justify-content-center pale-orange"> <img
+                                src="https://image.flaticon.com/icons/png/512/1732/1732303.png" alt=""> </div>
+                        <div class="d-flex flex-column"> <b>Designações</b> <a href="#">
+                                <p class="text-muted">para as Reuniões</p>
+                            </a> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 my-lg-0 my-3" onclick="abrir('saidas_campo.php')">
+                <div class="box bg-white">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle mx-3 d-flex align-items-center justify-content-center pale-purple"> <img
+                                src="https://image.flaticon.com/icons/png/512/2705/2705468.png"
+                                alt=""> </div>
+                        <div class="d-flex flex-column"> <b>Saídas</b> <a href="#">
+                                <p class="text-muted">de Serviço de Campo</p>
+                            </a> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 my-lg-3 my-3" onclick="abrir('#')">
+                <div class="box bg-white">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle mx-3 d-flex align-items-center justify-content-center pale-purple"> <img
+                                src="https://img-premium.flaticon.com/png/512/4952/premium/4952406.png?token=exp=1630156782~hmac=c488a3ac940de65103c155c8095312b5" alt=""> </div>
+                        <div class="d-flex flex-column"> <b>Gerenciador</b> <a href="#">
+                                <p class="text-muted">de Anúncios</p>
+                            </a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
