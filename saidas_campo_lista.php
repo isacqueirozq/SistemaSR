@@ -91,49 +91,67 @@
 </style>
 
 <?php
-/**
- * Calcula o número de semanas de um mês
- * 
- * @param int $ano
- * @param int $mes
- * @param int $primeiroDiaSemana Intervalo 1 (Segunda-Feira) até 7 (domingo), segundo ISO-8601
- * @return int
- */
-echo countSemanasMes(2021,10);
-function countSemanasMes($ano, $mes, $primeiroDiaSemana = 7)
-{
-    $primeiroDiaMes = new DateTime("$ano-$mes-01");
-    $ultimoDiaMes = new DateTime($primeiroDiaMes->format('Y-m-t'));
-
-    $numSemanaInicio = $primeiroDiaMes->format('W');
-    $numSemanaFinal  = $ultimoDiaMes->format('W') + 1;
-
-    // Última semana do ano pode ser semana 1
-    $numeroSemanas = ($numSemanaFinal < $numSemanaInicio)
-        ? (52 + $numSemanaFinal) - $numSemanaInicio
-        : $numSemanaFinal - $numSemanaInicio;
-
-    if ($primeiroDiaMes->format('N') > $primeiroDiaSemana)
-        $numeroSemanas--;
-
-    if ($ultimoDiaMes->format('N') < $primeiroDiaSemana)
-        $numeroSemanas--;
-
-    return $numeroSemanas;
-}
-
-
 
 setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
 date_default_timezone_set('America/Sao_Paulo');
-echo (strftime("%u")-1);
-$cod = strftime("%u")-1;
-function t($i){
-    $dirigente = ["Moisés", "Roberto", "Raimundo", "Maurício", "Isac", "Francisco","Roberto"];
-    $horario = ["18:00","18:00","18:00","---", "18:00", "8:30", "8:30"];
-    $link = ["Link1", "Link2", "Link3","Link4","Link5","Link6", "Link7"];
-    $dias = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"];
-    return ["$dirigente[$i]","$horario[$i]", "$dias[$i]", "$link[$i]"];
+$cod = strftime("%u")-1; // Dia da semana numerico 1 (para Segunda) até 7 (para Domingo)
+function t($dia){
+    
+    $s1 = ["Moisés","Segunda","18:00","https://linkdodirigente"];
+    $s2 = ["Roberto","Terça","18:00","https://linkdodirigente"];
+    $s3 = ["Francisco","Quarta","18:00","https://linkdodirigente"];
+    $s4 = ["---","Quinta","---","https://linkdodirigente"];
+    $s5 = ["Isac","Sexta","18:00","https://linkdodirigente"];
+    $s6_1 = ["Roberto","Sábado","8:30","https://linkdodirigente"];
+    $s6_2 = ["Isac","Sábado","8:30","https://linkdodirigente"];
+    $s6_3 = ["Maurício","Sábado","8:30","https://linkdodirigente"];
+    $s6_4 = ["Francisco","Sábado","8:30","https://linkdodirigente"];
+    $s6_5 = ["Moisés","Sábado","8:30","https://linkdodirigente"];
+    $s7_1 = ["Roberto","Domingo","8:30","https://linkdodirigente"];
+    $s7_2 = ["Raimundo","Domingo","8:30","https://linkdodirigente"];
+    $s7_3 = ["João Victor","Domingo","8:30","https://linkdodirigente"];
+    $s7_4 = ["Márcio","Domingo","8:30","https://linkdodirigente"];
+    $s7_5 = ["Samuel","Domingo","8:30","https://linkdodirigente"];
+    
+    $nsemana = 4;//numero de vezes de um dia dentro do mês
+    if ($dia == 1) {
+        return $s1;
+    }elseif ($dia == 2){
+        return $s2;   
+    }elseif ($dia == 3){
+        return $s3;   
+    }elseif ($dia == 4){
+        return $s4;   
+    }elseif ($dia == 5){
+        return $s5;   
+    }elseif ($dia == 6){
+        //Sábado
+        if ($nsemana == 1) {
+            return $s6_1;
+        }elseif($nsemana == 2){
+            return $s6_2;
+        }elseif($nsemana == 3){
+            return $s6_3;
+        }elseif($nsemana == 4){
+            return $s6_4;
+        }elseif($nsemana == 5){
+            return $s6_5;
+        }
+           
+    }elseif ($dia == 7){
+        //Domingo
+        if ($nsemana == 1) {
+            return $s7_1;
+        }elseif($nsemana == 2){
+            return $s7_2;
+        }elseif($nsemana == 3){
+            return $s7_3;
+        }elseif($nsemana == 4){
+            return $s7_4;
+        }elseif($nsemana == 5){
+            return $s7_5;
+        }  
+    }
 } 
 
 ?>
@@ -142,22 +160,28 @@ function t($i){
     <div class="container px-1 px-sm-4 py-5 mx-auto">
         <div class="row d-flex justify-content-center">
             <div class="card text-center pt-4 border-0">
-                <h4 class="mb-0"><?php echo t($cod)[0] ?></h4> <small class="text-muted mb-3">Dirigente</small>
-                <small>
-                    <h5><?php echo t($cod)[2] ?></h5>
-                </small>
-                <h2 class="large-font"><?php echo t($cod)[1] ?></h2>
-                <small>
-                    <a href='<?php echo t($cod)[3] ?>'>ENTRAR NA CONSIDERAÇÃO</a>
-                </small>
-                <div class="text-center mt-3 mb-4">
-                    <!-- informações -->
+                <button onclick="<?php   ?>"><</button><button>></button>
+                <div id="display">
+                    <?php
+                    $dia = 7;
+                    echo "<h4 class='mb-0'>".t($dia)[0]."</h4> <small class='text-muted mb-3'>Dirigente</small>
+                    <small>
+                        <h5>".t($dia)[1]."</h5>
+                    </small>
+                    <h2 class='large-font'>".t($dia)[2]."</h2>
+                    <small>
+                        <a href='".t($dia)[3]."'>ENTRAR NA CONSIDERAÇÃO</a>
+                    </small>
+                    <div class='text-center mt-3 mb-4'>
+                        <!-- informações -->
+                    </div>"
+                    ?>
                 </div>
 
 
-
             <div class="linha d-flex px-3 mt-auto">
-                <div class="d-flex flex-column block first-block"> <small class="text-muted mb-0">SEG</small>
+                
+                <div class="d-flex flex-column block first-block">      <small class="text-muted mb-0">SEG</small>
                     <div class="text-center"><img class="symbol-img" src="https://image.flaticon.com/icons/png/512/609/609040.png"></div>
                     <h6><strong>18:00</strong></h6>
                 </div>
@@ -185,6 +209,7 @@ function t($i){
                     <div class="text-center"><img class="symbol-img" src="https://image.flaticon.com/icons/png/512/609/609040.png"></div>
                     <h6><strong>8:30</strong></h6>
                 </div>
+
             </div>
             </div>
         </div>
