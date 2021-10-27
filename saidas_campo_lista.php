@@ -94,13 +94,73 @@
 
 setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
 date_default_timezone_set('America/Sao_Paulo');
-$cod = strftime("%u")-1; // Dia da semana numerico 1 (para Segunda) até 7 (para Domingo)
-function t($dia){
+//$cod = strftime("%u")-1; // Dia da semana numerico 1 (para Segunda) até 7 (para Domingo)
+//echo date( 'w' ) % 6 ? 'Não é fim de semana' : 'é fim de semana';
+
+function qtd_fimdesemana(){
+    /*Verifica de acordo com a data atual quantos
+    sábados e domingos tem dentro do mês corrente*/
+    $ultimodia = idate('t');//Último dia do mês. Retorna 30 ou 31
+    $iano = idate('Y');//ano
+    $imes = idate('m');//mês
+    $qtd_domingo=0;
+    $qtd_sabado=0;
+    $domingo = array();//criando array**
+    $sabado = array();//criando array**
+    for ($i=1; $i <= $ultimodia; $i++) { 
+        $date = new DateTime();
+        $date->setDate($iano, $imes, $i);//$i é o dia
+        $a = $date->format('w');//0 domingo ou 6 sabado
+        if ($a == 0) {
+            $qtd_domingo++;
+            array_push($domingo,$i);//adiciona o valor de $a a array.** 
+        } 
+        if ($a == 6) {
+            $qtd_sabado++;
+            array_push($sabado,$i);//adiciona o valor de $a a array.** 
+        }
+        
+    }
+    //Caso não tenha uma quinta semana incluir o campo em branco
+    $result = count($sabado);
+    if ($result == 4) {
+        array_push($sabado,'');
+    }
+    $result_domingo  = count($domingo);
+    if ($result_domingo == 4) {
+        array_push($domingo,'');
+    }
+
+    //atribuir uma key
+    $ordem = array('1','2','3','4','5');
+    $nSabado = array_combine($ordem,$sabado);
+    $nDomingo = array_combine($ordem,$domingo); 
     
+    $px_sabado = date('d',strtotime("next Saturday"));//proximo Sábado a partir de hoje
+    $px_domingo = date('d',strtotime("next Sunday"));//proximo domingo a partir de hoje
+    $hoje = date('d');
+    
+    $se_sabado = array_keys($nSabado, $px_sabado);//Identificando o numero da semana do sábado
+    $se_domingo = array_keys($nDomingo, $px_domingo);//Identificando o numero da semana do Domingo
+
+    if ($se_sabado != "") {
+        $return_sabado = $se_sabado[0];//Resultado que será enviado
+    }else{
+        $return_sabado = 1;
+    }
+    if ($se_domingo != "") {
+        $return_domingo = $se_domingo[0];//Resultado que será enviado
+    }else{
+        $return_domingo = 1;
+    }
+    return [$return_sabado,$return_domingo];
+}
+function t($dia){
+    //$dia ---- 1 para segunda e 7 para domingo
     $s1 = ["Moisés","Segunda","18:00","https://linkdodirigente"];
     $s2 = ["Roberto","Terça","18:00","https://linkdodirigente"];
     $s3 = ["Francisco","Quarta","18:00","https://linkdodirigente"];
-    $s4 = ["---","Quinta","---","https://linkdodirigente"];
+    $s4 = ["---","Quinta","---","semcampo.html"];
     $s5 = ["Isac","Sexta","18:00","https://linkdodirigente"];
     $s6_1 = ["Roberto","Sábado","8:30","https://linkdodirigente"];
     $s6_2 = ["Isac","Sábado","8:30","https://linkdodirigente"];
@@ -113,64 +173,63 @@ function t($dia){
     $s7_4 = ["Márcio","Domingo","8:30","https://linkdodirigente"];
     $s7_5 = ["Samuel","Domingo","8:30","https://linkdodirigente"];
     
-    $nsemana = 4;//numero de vezes de um dia dentro do mês
+    $nsemana_sabado = qtd_fimdesemana()[0];//O mês tem 4 ou 5 semanas
+    $nsemana_domingo = qtd_fimdesemana()[1];//O mês tem 4 ou 5 semanas
+
     if ($dia == 1) {
         return $s1;
     }elseif ($dia == 2){
         return $s2;   
     }elseif ($dia == 3){
-        return $s3;   
+        return $s3; 
     }elseif ($dia == 4){
         return $s4;   
     }elseif ($dia == 5){
         return $s5;   
     }elseif ($dia == 6){
         //Sábado
-        if ($nsemana == 1) {
+        if ($nsemana_sabado == 1) {
             return $s6_1;
-        }elseif($nsemana == 2){
+        }elseif($nsemana_sabado == 2){
             return $s6_2;
-        }elseif($nsemana == 3){
+        }elseif($nsemana_sabado == 3){
             return $s6_3;
-        }elseif($nsemana == 4){
+        }elseif($nsemana_sabado == 4){
             return $s6_4;
-        }elseif($nsemana == 5){
+        }elseif($nsemana_sabado == 5){
             return $s6_5;
         }
            
     }elseif ($dia == 7){
         //Domingo
-        if ($nsemana == 1) {
+        if ($nsemana_domingo == 1) {
             return $s7_1;
-        }elseif($nsemana == 2){
+        }elseif($nsemana_domingo == 2){
             return $s7_2;
-        }elseif($nsemana == 3){
+        }elseif($nsemana_domingo == 3){
             return $s7_3;
-        }elseif($nsemana == 4){
+        }elseif($nsemana_domingo == 4){
             return $s7_4;
-        }elseif($nsemana == 5){
+        }elseif($nsemana_domingo == 5){
             return $s7_5;
         }  
     }
 } 
-
 ?>
-
 <body>
     <div class="container px-1 px-sm-4 py-5 mx-auto">
         <div class="row d-flex justify-content-center">
             <div class="card text-center pt-4 border-0">
-                <button onclick="<?php   ?>"><</button><button>></button>
                 <div id="display">
                     <?php
-                    $dia = 7;
+                    $dia = date('N'); // 1 para segunda e 7 para domingo
                     echo "<h4 class='mb-0'>".t($dia)[0]."</h4> <small class='text-muted mb-3'>Dirigente</small>
                     <small>
                         <h5>".t($dia)[1]."</h5>
                     </small>
                     <h2 class='large-font'>".t($dia)[2]."</h2>
                     <small>
-                        <a href='".t($dia)[3]."'>ENTRAR NA CONSIDERAÇÃO</a>
+                        <a href='".t($dia)[3]."'>LINK DA CONSIDERAÇÃO VIA ZOOM</a>
                     </small>
                     <div class='text-center mt-3 mb-4'>
                         <!-- informações -->
