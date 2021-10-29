@@ -157,21 +157,21 @@ function qtd_fimdesemana(){
 }
 function t($dia){
     //$dia ---- 1 para segunda e 7 para domingo
-    $s1 = ["Moisés","Segunda","18:00","https://linkdodirigente"];
-    $s2 = ["Roberto","Terça","18:00","https://linkdodirigente"];
-    $s3 = ["Francisco","Quarta","18:00","https://linkdodirigente"];
-    $s4 = ["---","Quinta","---","semcampo.html"];
-    $s5 = ["Isac","Sexta","18:00","https://linkdodirigente"];
-    $s6_1 = ["Roberto","Sábado","8:30","https://linkdodirigente"];
-    $s6_2 = ["Isac","Sábado","8:30","https://linkdodirigente"];
-    $s6_3 = ["Maurício","Sábado","8:30","https://linkdodirigente"];
-    $s6_4 = ["Francisco","Sábado","8:30","https://linkdodirigente"];
-    $s6_5 = ["Moisés","Sábado","8:30","https://linkdodirigente"];
-    $s7_1 = ["Roberto","Domingo","8:30","https://linkdodirigente"];
-    $s7_2 = ["Raimundo","Domingo","8:30","https://linkdodirigente"];
-    $s7_3 = ["João Victor","Domingo","8:30","https://linkdodirigente"];
-    $s7_4 = ["Márcio","Domingo","8:30","https://linkdodirigente"];
-    $s7_5 = ["Samuel","Domingo","8:30","https://linkdodirigente"];
+    $s1 = ["Moisés","Segunda","18:00","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s2 = ["Roberto","Terça","18:00","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s3 = ["Francisco","Quarta","18:00","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s4 = ["---","Quinta","-- : --","semcampo.html"];
+    $s5 = ["Isac","Sexta","18:00","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s6_1 = ["Roberto","Sábado","8:30","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s6_2 = ["Isac","Sábado","8:30","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s6_3 = ["Maurício","Sábado","8:30","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s6_4 = ["Francisco","Sábado","8:30","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s6_5 = ["Moisés","Sábado","8:30","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s7_1 = ["Roberto","Domingo","8:30","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s7_2 = ["Raimundo","Domingo","8:30","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s7_3 = ["João Victor","Domingo","8:30","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s7_4 = ["Márcio","Domingo","8:30","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $s7_5 = ["Samuel","Domingo","8:30","https://jworg.zoom.us/my/santoantoniodoslopes"];
     
     $nsemana_sabado = qtd_fimdesemana()[0];//O mês tem 4 ou 5 semanas
     $nsemana_domingo = qtd_fimdesemana()[1];//O mês tem 4 ou 5 semanas
@@ -316,7 +316,7 @@ function t($dia){
                         /* Container for image text */
                         .caption-container {
                         text-align: center;
-                        background-color:indigo;
+                        background-color:darkcyan;
                         padding: 2px 16px;
                         color: white;
                         }
@@ -344,7 +344,7 @@ function t($dia){
                         }
                     </style>
                     <!-- PÁGINAS -->
-                    <!-- Container for the image gallery -->
+                    <!-- Container gallery -->
                     <div class="container">
                         <!-- Full-width images with number text -->
                         <div class="mySlides">
@@ -440,31 +440,38 @@ function t($dia){
                             <h6><strong>18:00</strong></h6>
                         </div>
                     </div>
-                    <div class="d-flex flex-column block first-block demo">      <small class="text-muted mb-0">SEG</small>
+                    <div class="d-flex flex-column block first-block demo">      
+                        <small class="text-muted mb-0">SEG</small>
                         <div class="text-center" onclick="currentSlide(2)"><img class="symbol-img" src="https://image.flaticon.com/icons/png/512/609/609040.png"></div>
                         <h6><strong>18:00</strong></h6>
                     </div>
-                    <div class="d-flex flex-column block demo"> <small class="text-muted mb-0">TER</small>
+                    <div class="d-flex flex-column block demo"> 
+                        <small class="text-muted mb-0">TER</small>
                         <div class="text-center" onclick="currentSlide(3)"><img class="symbol-img" src="https://image.flaticon.com/icons/png/512/609/609040.png"></div>
                         <h6><strong>18:00</strong></h6>
                     </div>
-                    <div class="d-flex flex-column block demo"> <small class="text-muted mb-0">QUA</small>
+                    <div class="d-flex flex-column block demo"> 
+                        <small class="text-muted mb-0">QUA</small>
                         <div class="text-center" onclick="currentSlide(4)"><img class="symbol-img" src="https://image.flaticon.com/icons/png/512/609/609040.png"></div>
                         <h6><strong>18:00</strong></h6>
                     </div>
-                    <div class="d-flex flex-column block demo"> <small class="text-muted mb-0">QUI</small>
+                    <div class="d-flex flex-column block demo"> 
+                        <small class="text-muted mb-0">QUI</small>
                         <div class="text-center" onclick="currentSlide(5)"><img class="symbol-img" src="https://image.flaticon.com/icons/png/512/1147/1147965.png"></div>
                         <h6><strong>-</strong></h6>
                     </div>
-                    <div class="d-flex flex-column block demo"> <small class="text-muted mb-0">SEX</small>
+                    <div class="d-flex flex-column block demo"> 
+                        <small class="text-muted mb-0">SEX</small>
                         <div class="text-center" onclick="currentSlide(6)"><img class="symbol-img" src="https://image.flaticon.com/icons/png/512/609/609040.png"></div>
                         <h6><strong>18:00</strong></h6>
                     </div>
-                    <div class="d-flex flex-column block demo"> <small class="text-muted mb-0">SAB</small>
+                    <div class="d-flex flex-column block demo"> 
+                        <small class="text-muted mb-0">SAB</small>
                         <div class="text-center" onclick="currentSlide(7)"><img class="symbol-img" src="https://image.flaticon.com/icons/png/512/609/609040.png"></div>
                         <h6><strong>8:30</strong></h6>
                     </div>
-                    <div class="d-flex flex-column block last-block demo"> <small class="text-muted mb-0">DOM</small>
+                    <div class="d-flex flex-column block last-block demo"> 
+                        <small class="text-muted mb-0">DOM</small>
                         <div class="text-center" onclick="currentSlide(8)"><img class="symbol-img" src="https://image.flaticon.com/icons/png/512/609/609040.png"></div>
                         <h6><strong>8:30</strong></h6>
                     </div>
