@@ -327,15 +327,20 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Salvar_$tabela" && $nome != 
         $stmt->bindParam(4, $ano);
         if ($stmt->execute()) {
             if ($stmt->rowCount() > 0) {
-                echo "Gravado com sucesso!";
                 $nome = null;
                 $mes = null;
                 $requisito = null;
                 $ano = null;
             ?>
                 <script type="text/javascript">
-                    window.open('index.php', '_self');
+                    var passaValor = function(valor) {
+                        window.location = "Sucesso.html?minhaVariavel=" + valor;
+                    }
+                    var pagina = 'index.php';
+                    passaValor(pagina);
+                    // window.open('designacoes_editar.php', '_self');
                 </script>
+
             <?php
             } else {
                 echo "Erro ao tentar efetivar cadastro";
