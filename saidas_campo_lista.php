@@ -157,6 +157,7 @@ function qtd_fimdesemana(){
 }
 function t($dia){
     //$dia ---- 1 para segunda e 7 para domingo
+    //dirigente, dia,hora, link, semana(0 para todas)
     $s1 = ["Moisés","Segunda","18:00","https://jworg.zoom.us/my/santoantoniodoslopes"];
     $s2 = ["Roberto","Terça","18:00","https://jworg.zoom.us/my/santoantoniodoslopes"];
     $s3 = ["Francisco","Quarta","18:00","https://jworg.zoom.us/my/santoantoniodoslopes"];

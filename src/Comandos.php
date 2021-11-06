@@ -506,28 +506,26 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Deletar_$tabela" && $id != "
 $tabela = "SAIDA_CAMPO";
 $id = (isset($_POST["id"]) && $_POST["id"] != null) ? $_POST["id"] : "";
 $dia = (isset($_POST["dia_Semana"]) && $_POST["dia_Semana"] != null) ? $_POST["dia_Semana"] : "";
-$grupo = (isset($_POST["grupo"]) && $_POST["grupo"] != null) ? $_POST["grupo"] : "";
+$semana_do_mes = (isset($_POST["semana_do_mes"]) && $_POST["semana_do_mes"] != null) ? $_POST["semana_do_mes"] : "";
 $dirigente = (isset($_POST["dirigente"]) && $_POST["dirigente"] != null) ? $_POST["dirigente"] : "";
-$local = (isset($_POST["local_saida"]) && $_POST["local_saida"] != null) ? $_POST["local_saida"] : "";
+$link = (isset($_POST["link"]) && $_POST["link"] != null) ? $_POST["link"] : "";
 $hora = (isset($_POST["hora"]) && $_POST["hora"] != null) ? $_POST["hora"] : "";
-$detalhes = (isset($_POST["detalhes"]) && $_POST["detalhes"] != null) ? $_POST["detalhes"] : "";
 
 // ------- Salvar -------
 if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Salvar_$tabela" && $dirigente != "") {
 
     try {
         if ($id != "") {
-            $stmt = $conn->prepare("UPDATE $tabela SET Dia_Semana = ?, Grupo = ?, Dirigente = ?, Local =?,Hora = ?, Detalhes = ? WHERE id = ?");
-            $stmt->bindParam(7, $id);
+            $stmt = $conn->prepare("UPDATE $tabela SET Dia_Semana = ?, Semana_do_mes = ?, Dirigente = ?, Link =?, Hora = ? WHERE id = ?");
+            $stmt->bindParam(6, $id);
         } else {
-            $stmt = $conn->prepare("INSERT INTO $tabela (Dia_Semana, Grupo, Dirigente, Local, Hora, Detalhes) VALUES (?,?,?,?,?,?)");
+            $stmt = $conn->prepare("INSERT INTO $tabela (Dia_Semana, Semana_do_mes, Dirigente, Link, Hora) VALUES (?,?,?,?,?)");
         }
         $stmt->bindParam(1, $dia);
-        $stmt->bindParam(2, $grupo);
+        $stmt->bindParam(2, $semana_do_mes);
         $stmt->bindParam(3, $dirigente);
-        $stmt->bindParam(4, $local);
+        $stmt->bindParam(4, $link);
         $stmt->bindParam(5, $hora);
-        $stmt->bindParam(6, $detalhes);
 
         if ($stmt->execute()) {
             if ($stmt->rowCount() > 0) {
@@ -538,7 +536,7 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Salvar_$tabela" && $dirigent
                 // $ano = null;
             ?>
                 <script type="text/javascript">
-                    window.open('index.php', '_self');
+                    window.open('saidas_campo.php', '_self');
                 </script>
             <?php
             } else {

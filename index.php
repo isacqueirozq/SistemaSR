@@ -219,11 +219,18 @@ function sabado()
                 <option value="6">Sexta</option>
                 <option value="7">Sábado</option>
             </select>
-            <input type="text" name="grupo" id="grupo" placeholder="Nome do Grupo">
+            <select name="semana_do_mes" id="semana_do_mes" required>
+                <option value="0" selected>Em todas as semanas</option>
+                <option value="1">1° Semana do mês</option>
+                <option value="2">2°Semana do mês</option>
+                <option value="3">3° Semana do mês</option>
+                <option value="4">4° Semena do mês</option>
+                <option value="5">5° Semana do mês</option>
+            </select>
+            <!-- <input type="text" name="semana_do_mes" id="semana_do_mes" placeholder="Semana do mês"> -->
             <input type="text" name="dirigente" id="dirigente" placeholder="Nome do Dirigente" required>
-            <input type="text" name="local_saida" id="local_saida" placeholder="Local da Saída" required>
+            <input type="text" name="link" id="link" placeholder="Link" required>
             <input type="time" name="hora" id="hora" required>
-            <input type="text" name="detalhes" id="detalhes" placeholder="Detalhes Adicionais">
             <input type="submit" value="Gravar e Fixar no Quadro">
         </form>
         <br>

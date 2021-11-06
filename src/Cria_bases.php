@@ -69,13 +69,11 @@ try {
                             //==== CRIA TABELA ==== SAÍDAS DE CAMPO
                             $sql = "CREATE TABLE IF NOT EXISTS SAIDA_CAMPO (
                             ID int(11) AUTO_INCREMENT PRIMARY KEY,
-                            Dia_Semana int NOT NULL,
-                            Grupo varchar(30),
+                            Dia_Semana int(11) NOT NULL,
+                            Semana_do_mes int(11),
                             Dirigente varchar(30) NOT NULL,
-                            Local varchar(30) NOT NULL,
-                            Hora time NOT NULL,
-                            Detalhes varchar(50)
-                            )";
+                            Link varchar(50) NOT NULL,
+                            Hora time NOT NULL)";
                             $conn->exec($sql);
                         break;
 
