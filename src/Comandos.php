@@ -513,11 +513,29 @@ $hora = (isset($_POST["hora"]) && $_POST["hora"] != null) ? $_POST["hora"] : "";
 
 // ------- Salvar -------
 if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Salvar_$tabela" && $dirigente != "") {
-
+    //validar se existe
     try {
-        if ($id != "") {
-            $stmt = $conn->prepare("UPDATE $tabela SET Dia_Semana = ?, Semana_do_mes = ?, Dirigente = ?, Link =?, Hora = ? WHERE id = ?");
-            $stmt->bindParam(6, $id);
+        /* Consultando a base e vendo se ja existe */
+        $existe = $conn->prepare("SELECT * FROM $tabela WHERE Dia_Semana = $dia AND Semana_do_mes = $semana_do_mes");
+        // if ($existe->execute()) {
+        //     if($existe->rowCount() > 0){
+        //         //Se existir
+        //         echo "Já tem";
+        //     }else{
+        //         //Se não existir
+        //         echo "Não tem";
+        //     }
+            
+            
+        // }else{
+        //     echo "Erro ao consultar";
+        // }
+
+
+        if ($existe->execute()) {
+            $stmt = $conn->prepare("UPDATE $tabela SET Dia_Semana = ?, Semana_do_mes = ?, Dirigente = ?, Link =?, Hora = ? WHERE Dia_Semana = ? AND Semana_do_mes = ?");
+            $stmt->bindParam(6, $dia);
+            $stmt->bindParam(7, $semana_do_mes);
         } else {
             $stmt = $conn->prepare("INSERT INTO $tabela (Dia_Semana, Semana_do_mes, Dirigente, Link, Hora) VALUES (?,?,?,?,?)");
         }
@@ -529,16 +547,12 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Salvar_$tabela" && $dirigent
 
         if ($stmt->execute()) {
             if ($stmt->rowCount() > 0) {
-                echo "Gravado com sucesso!";
-                // $nome = null;
-                // $mes = null;
-                // $requisito = null;
-                // $ano = null;
-            ?>
-                <script type="text/javascript">
+                
+             ?>
+                <!-- <script type="text/javascript">
                     window.open('saidas_campo.php', '_self');
-                </script>
-            <?php
+                </script> -->
+             <?php
             } else {
                 echo "Erro ao tentar efetivar cadastro";
             }
