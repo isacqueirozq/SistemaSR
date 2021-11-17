@@ -155,9 +155,63 @@ function qtd_fimdesemana(){
     }
     return [$return_sabado,$return_domingo];
 }
+
 function t($dia){
-    //$dia ---- 1 para segunda e 7 para domingo
-    //dirigente, dia,hora, link, semana(0 para todas)
+    $nsemana_sabado = qtd_fimdesemana()[0];//Mês tem 4 ou 5 semanas
+    $nsemana_domingo = qtd_fimdesemana()[1];//Mês tem 4 ou 5 semanas
+    require("src/Carrega_dados.php");
+    try {     
+            //Caso não seja sábado e domingo       
+            if ($dia != 1 || $dia != 7) {
+                $semana = 0;
+            }
+            //Caso seja sábado
+            if ($dia == 7){ $semana = $nsemana_sabado; } 
+            //Caso seja domingo
+            if ($dia == 1){ $semana = $nsemana_domingo; } 
+            $stmt = $conn->prepare("SELECT * FROM SAIDA_CAMPO WHERE Dia_Semana = $dia AND Semana_do_mes = $semana");
+            if ($stmt->execute()) {
+                while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $id = $rs->ID;
+                    $diasemana = $rs->Dia_Semana;
+                    if ($diasemana == 1) {
+                        $diasemana = "Domingo";
+                    } elseif ($diasemana == 2) {
+                        $diasemana = "Segunda";
+                    } elseif ($diasemana == 3) {
+                        $diasemana = "Terça";
+                    } elseif ($diasemana == 4) {
+                        $diasemana = "Quarta";
+                    } elseif ($diasemana == 5) {
+                        $diasemana = "Quinta";
+                    } elseif ($diasemana == 6) {
+                        $diasemana = "Sexta";
+                    } elseif ($diasemana == 7) {
+                        $diasemana = "Sábado";
+                    }
+                    // $semanames = $rs->Semana_do_mes;
+                    $dirigente = $rs->Dirigente;
+                    $link = $rs->Link;
+
+                    //mostrando hora e minuto e retirando os segundos
+                    $hora = date("H:i", strtotime(".$rs->Hora."));
+
+                    return [$dirigente,$diasemana,$hora,$link];
+                }
+            } else {
+                echo "Erro: Não foi possível recuperar os dados do banco de dados";
+            }
+       
+    } catch (PDOException $erro) {
+        echo "Erro: " . $erro->getMessage();
+    }
+    /*echo "S".$nsemana_sabado;
+    echo "D".$nsemana_domingo;
+    print_r($dia);            
+    return ["Moisés","Segunda","18:00","https://jworg.zoom.us/my/santoantoniodoslopes"];
+    $dia ---- 1 para segunda e 7 para domingo
+    dirigente, dia,hora, link, semana(0 para todas)
+
     $s1 = ["Moisés","Segunda","18:00","https://jworg.zoom.us/my/santoantoniodoslopes"];
     $s2 = ["Roberto","Terça","18:00","https://jworg.zoom.us/my/santoantoniodoslopes"];
     $s3 = ["Francisco","Quarta","18:00","https://jworg.zoom.us/my/santoantoniodoslopes"];
@@ -174,8 +228,7 @@ function t($dia){
     $s7_4 = ["Márcio","Domingo","8:30","https://jworg.zoom.us/my/santoantoniodoslopes"];
     $s7_5 = ["Samuel","Domingo","8:30","https://jworg.zoom.us/my/santoantoniodoslopes"];
     
-    $nsemana_sabado = qtd_fimdesemana()[0];//O mês tem 4 ou 5 semanas
-    $nsemana_domingo = qtd_fimdesemana()[1];//O mês tem 4 ou 5 semanas
+    
 
     if ($dia == 1) {
         return $s1;
@@ -214,8 +267,92 @@ function t($dia){
         }elseif($nsemana_domingo == 5){
             return $s7_5;
         }  
-    }
+    }*/
 } 
+
+function mostrar($dia, $semana){
+    /*
+    Função que preenche a tela com as
+    informações do banco de dados. Considerando
+    Dia - 1 é domingo e 7 é sabado
+    Semana - 0 é todas e 5 é quinta semana
+    */
+
+    //Necessários
+    require_once("src/Carrega_dados.php");
+    setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
+    date_default_timezone_set('America/Sao_Paulo');
+
+    //Consulta da Base sql
+    try {
+        $today = date('N');
+        if ($dia == $today) {
+            echo "<p class='caption-container'>HOJE</p>";
+        }
+        if ($dia != 1 || $dia != 7) {
+            $semana = 0;
+        }
+        $stmt = $conn->prepare("SELECT * FROM SAIDA_CAMPO WHERE Dia_Semana = $dia AND Semana_do_mes = $semana");
+        if ($stmt->execute()) {
+            while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $id = $rs->ID;
+                $diasemana = $rs->Dia_Semana;
+                if ($diasemana == 1) {
+                    $diasemana = "Domingo";
+                } elseif ($diasemana == 2) {
+                    $diasemana = "Segunda";
+                } elseif ($diasemana == 3) {
+                    $diasemana = "Terça";
+                } elseif ($diasemana == 4) {
+                    $diasemana = "Quarta";
+                } elseif ($diasemana == 5) {
+                    $diasemana = "Quinta";
+                } elseif ($diasemana == 6) {
+                    $diasemana = "Sexta";
+                } elseif ($diasemana == 7) {
+                    $diasemana = "Sábado";
+                }
+                // $semanames = $rs->Semana_do_mes;
+                $dirigente = $rs->Dirigente;
+                $link = $rs->Link;
+
+                //mostrando hora e minuto e retirando os segundos
+                $hora = date("H:i", strtotime(".$rs->Hora."));
+
+                // if ($diasemana == "") {
+                //     $diasemana = "Não designado";
+                // }
+                // if ($dirigente == "") {
+                //     $dirigente = "Não designado";
+                // }
+                // if ($link == "") {
+                //     $link = "Não informado";
+                // }
+                // if ($hora == "") {
+                //     $hora = "Não informado";
+                // }
+                //Verifica se o dia escolhido é igual ao dia de hoje
+
+                // Exibi os dados
+                echo "<h4 class='mb-0'>" . $dirigente . "</h4> <small class='text-muted mb-3'>Dirigente</small>
+                            <small>
+                                <h5>" . $diasemana . "</h5>
+                            </small>
+                            <h2 class='large-font'>" . $hora . "</h2>
+                            <small>
+                                <a href='" . $link . "'>LINK DA CONSIDERAÇÃO VIA ZOOM</a>
+                            </small>
+                            <div class='text-center mt-3 mb-4'>
+                                <!-- informações -->
+                            </div>";
+            }
+        } else {
+            echo "Erro: Não foi possível recuperar os dados do banco de dados";
+        }
+    } catch (PDOException $erro) {
+        echo "Erro: " . $erro->getMessage();
+    }
+}
 ?>
 <body>
     <div class="container px-1 px-sm-4 py-5 mx-auto">
@@ -229,28 +366,26 @@ function t($dia){
                             $dia = date('N'); // 1 para segunda e 7 para domingo
                         }
                     
-                        $today = date('N');
-                            if ($dia == $today) {
-                                echo "<p class='caption-container'>HOJE</p>";
-                            }
-                        echo "<h4 class='mb-0'>".t($dia)[0]."</h4> <small class='text-muted mb-3'>Dirigente</small>
+                        $today = date('N')+1;
+                        if ($dia == $today) {
+                            echo "<p class='caption-container'>HOJE</p>";
+                        }
+                        $dado = t($dia);
+                        echo "<h4 class='mb-0'>".$dado[0]."</h4> <small class='text-muted mb-3'>Dirigente</small>
                         <small>
-                            <h5>".t($dia)[1]."</h5>
+                            <h5>".$dado[1]."</h5>
                         </small>
-                        <h2 class='large-font'>".t($dia)[2]."</h2>
+                        <h2 class='large-font'>".$dado[2]."</h2>
                         <small>
-                            <a href='".t($dia)[3]."'>LINK DA CONSIDERAÇÃO VIA ZOOM</a>
+                            <a href='".$dado[3]."'>LINK DA CONSIDERAÇÃO VIA ZOOM</a>
                         </small>
                         <div class='text-center mt-3 mb-4'>
                             <!-- informações -->
                         </div>";
                     }
-                    
                     // padrao(0);
                     ?>
-                    
                     <!-- **** Slide ***  -->
-                    <!-- ESTILO -->
                     <style>
                         * {
                         box-sizing: border-box;
@@ -344,49 +479,48 @@ function t($dia){
                         opacity: 1;
                         }
                     </style>
-                    <!-- PÁGINAS -->
-                    <!-- Container gallery -->
                     <div class="container">
                         <!-- Full-width images with number text -->
                         <div class="mySlides">
                             <!-- numbertext está sendo oculto no css -->
+                            <!-- 1 é domingo 7 é sábado -->
                             <div class="numbertext">0 / 0</div> 
-                            <?php padrao(0);?>
+                            <?php $hoje = date('N')+1; padrao($hoje);?>
                         </div>
 
                         <div class="mySlides">
                             <div class="numbertext">1 / 7</div>
-                            <?php padrao(1);?>
-                        </div>
-
-                        <div class="mySlides">
-                            <div class="numbertext">2 / 7</div>
                             <?php padrao(2);?>
                         </div>
 
                         <div class="mySlides">
-                            <div class="numbertext">3 / 7</div>
+                            <div class="numbertext">2 / 7</div>
                             <?php padrao(3);?>
                         </div>
 
                         <div class="mySlides">
-                            <div class="numbertext">4 / 7</div>
+                            <div class="numbertext">3 / 7</div>
                             <?php padrao(4);?>
                         </div>
 
                         <div class="mySlides">
-                            <div class="numbertext">5 / 7</div>
+                            <div class="numbertext">4 / 7</div>
                             <?php padrao(5);?>
                         </div>
 
                         <div class="mySlides">
-                            <div class="numbertext">6 / 7</div>
+                            <div class="numbertext">5 / 7</div>
                             <?php padrao(6);?>
                         </div>
 
                         <div class="mySlides">
-                            <div class="numbertext">7 / 7</div>
+                            <div class="numbertext">6 / 7</div>
                             <?php padrao(7);?>
+                        </div>
+
+                        <div class="mySlides">
+                            <div class="numbertext">7 / 7</div>
+                            <?php padrao(1);?>
                         </div>
 
                         <!-- Next and previous buttons -->
@@ -433,6 +567,7 @@ function t($dia){
                         <!-- Fim Slide -->
                     </div>
                 </div>
+
                 <!-- MENU INFERIOR -->
                 <div class="linha d-flex px-3 mt-auto">
                     <div hidden>
