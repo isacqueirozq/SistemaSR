@@ -517,21 +517,7 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Salvar_$tabela" && $dirigent
     try {
         /* Consultando a base e vendo se ja existe */
         $existe = $conn->prepare("SELECT * FROM $tabela WHERE Dia_Semana = $dia AND Semana_do_mes = $semana_do_mes");
-        // if ($existe->execute()) {
-        //     if($existe->rowCount() > 0){
-        //         //Se existir
-        //         echo "Já tem";
-        //     }else{
-        //         //Se não existir
-        //         echo "Não tem";
-        //     }
-            
-            
-        // }else{
-        //     echo "Erro ao consultar";
-        // }
-
-
+        
         if ($existe->execute()) {
             $stmt = $conn->prepare("UPDATE $tabela SET Dia_Semana = ?, Semana_do_mes = ?, Dirigente = ?, Link =?, Hora = ? WHERE Dia_Semana = ? AND Semana_do_mes = ?");
             $stmt->bindParam(6, $dia);

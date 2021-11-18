@@ -118,9 +118,9 @@ require_once("src/Carrega_dados.php");
             ?>
         </header>
         <?php
-            // ###############
-            // # DESIGNAÇÕES #
-            // ###############
+            // #####################
+            // # Vida e Ministério #
+            // #####################
             try {
                 $stmt = $conn->prepare("SELECT * FROM DESIGNACOES WHERE Data >= CURRENT_DATE() AND Reuniao = 0 LIMIT 1");
                 if ($stmt->execute()) {
@@ -298,8 +298,9 @@ require_once("src/Carrega_dados.php");
     <div class="conteudo">
         <?php
             // ###############
-            // # DESIGNAÇÕES #
+            // #  Discursos  #
             // ###############
+            $presidente = "";
             try {
                 $stmt = $conn->prepare("SELECT * FROM DESIGNACOES WHERE Data >= CURRENT_DATE() AND Reuniao = 1 LIMIT 1");
                 if ($stmt->execute()) {
