@@ -407,7 +407,8 @@ function sabado()
                 <h2>Quadro de Anúncios <span><br> Cong. Santo Antônio dos Lopes</span></h2>
                 <p>Para uso da congregação durante o período da Pandemia de Covid-19.
                 <p>Envie seu Relatório, petição de Pioneiro Auxiliar. Veja as designações das reuniões, dirigentes e horários das saídas de campo.</p>
-                <small><strong>Importante!</strong> Nenhuma informação pessoal é armazenada nese site.</small></p>
+                <small><strong>Importante!</strong> Nenhuma informação pessoal é armazenada nese site.</small>
+                <p><small><strong>Contato do Desenvolvedor:</strong><a href="mailto:isacqueirozq@hotmail.com"> Clique aqui</a></small></p>
             </div>
         </main>
     </div>
