@@ -137,7 +137,7 @@
             }
 
             // MES
-            $publicadores_qtd = 43;
+            $publicadores_qtd = 49;
             $percentual = round($rel_total / $publicadores_qtd * 100);
             ?>
 
