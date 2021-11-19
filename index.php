@@ -397,7 +397,7 @@ function sabado()
                     <li><a href="relatorio_enviar.php">Relatório de Serviço de Campo</a></li>
                     <li><a href="peticaoauxiliar_enviar.php">Enviar Petição de P. Auxiliar </a></li>
                     <li><a href="saidas_campo_lista.php">Saídas de Campo</a></li>
-                    <li class="small"><a href="gerenciamento.html">Entrar</a><a href="#0">Anúncios</a></li>
+                    <li class="small"><a href="gerenciamento.html">Entrar</a><a href="#0">Eventos</a></li>
                 </ul>
             </div>
         </div>
