@@ -1,20 +1,5 @@
 <?php
-/////////////////////////////////////////////////////////////////////////
-$servername = "localhost";
-$database = "SistemaSR";
-$username = "id16024105_isac";
-$password = "K/1it]t&iJM4~_[A";
-$sql = "mysql:host=$servername;dbname=$database;";
-$dsn_Options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
-// Create a new connection to the MySQL database using PDO
-try {
-    $conn = new PDO($sql, $username, $password, $dsn_Options);
-    //echo "Connected successfully";
-} catch (PDOException $error) {
-    echo 'Connection error: ' . $error->getMessage();
-}
-//////////////////////////////////////////////////////////////////////////
-
+require_once("ConexaoBD.php");
 //----------------------
 // Tabela: ASSISTENCIA
 //----------------------
@@ -516,9 +501,9 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Salvar_$tabela" && $dirigent
     //validar se existe
     try {
         /* Consultando a base e vendo se ja existe */
-        $existe = $conn->prepare("SELECT * FROM $tabela WHERE Dia_Semana = $dia AND Semana_do_mes = $semana_do_mes");
-        
-        if ($existe->execute()) {
+        $existe = $conn->query("SELECT * FROM $tabela WHERE Dia_Semana = $dia AND Semana_do_mes = $semana_do_mes")->rowCount() > 0;
+       
+        if ($existe > 0) {
             $stmt = $conn->prepare("UPDATE $tabela SET Dia_Semana = ?, Semana_do_mes = ?, Dirigente = ?, Link =?, Hora = ? WHERE Dia_Semana = ? AND Semana_do_mes = ?");
             $stmt->bindParam(6, $dia);
             $stmt->bindParam(7, $semana_do_mes);

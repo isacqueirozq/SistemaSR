@@ -3,7 +3,7 @@ require_once("ConexaoBD.php");
 try {
     $conn->exec("set names utf8");
     //VERIFICANDO BASES E SUAS TABELAS
-        $databases = "SistemaSR";
+        $databases = "SistemaSR"; 
         $existe = $conn->query("SHOW DATABASES LIKE '$databases'")->rowCount() > 0;
         if ($existe > 0) {
             //VERIFICA TODAS AS TABELAS

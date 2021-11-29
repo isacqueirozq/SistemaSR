@@ -1,5 +1,5 @@
 <?php
-require_once("src/Carrega_dados.php");
+require_once("src/ConexaoBD.php");
 // $tipo = 2;
 // if ($tipo == 1) {
 //     echo "REVISITA";
@@ -122,35 +122,56 @@ require_once("src/Carrega_dados.php");
             // # Vida e Ministério #
             // #####################
             try {
-                $stmt = $conn->prepare("SELECT * FROM DESIGNACOES WHERE Data >= CURRENT_DATE() AND Reuniao = 0 LIMIT 1");
-                if ($stmt->execute()) {
-                    while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
-                        $reuniao = $rs->Reuniao;
-                        $data = $rs->Data;
-                        $presidente = $rs->Presidente;
-                        $orador = $rs->Orador;
-                        $tema = $rs->Tema;
-                        $leitor = $rs->Leitor;
-                        $tesouro = $rs->Tesouros;
-                        $joias = $rs->Joias;
-                        $l_biblia = $rs->L_Biblia;
-                        $faca1 = $rs->Faca_01;
-                        $faca2 = $rs->Faca_02;
-                        $faca3 = $rs->Faca_03;
-                        $faca4 = $rs->Faca_04;
-                        $vida1 = $rs->Vida_01;
-                        $vida2 = $rs->Vida_02;
-                        $vida3 = $rs->Vida_03;
-                        $dirigente = $rs->Dirigente_EBC;
-                        $leitor_ebc = $rs->Leitor_EBC;
+                $existe = $conn->query("SELECT * FROM DESIGNACOES WHERE Data >= CURRENT_DATE() AND Reuniao = 0 LIMIT 1")->rowCount();
+                if ($existe > 0) {
+                    //Se tiver uma programação, carregue os dados.
+                    $stmt = $conn->prepare("SELECT * FROM DESIGNACOES WHERE Data >= CURRENT_DATE() AND Reuniao = 0 LIMIT 1");
+                    if ($stmt->execute()) {
+                        while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+                            $reuniao = $rs->Reuniao;
+                            $data = $rs->Data;
+                            $presidente = $rs->Presidente;
+                            $orador = $rs->Orador;
+                            $tema = $rs->Tema;
+                            $leitor = $rs->Leitor;
+                            $tesouro = $rs->Tesouros;
+                            $joias = $rs->Joias;
+                            $l_biblia = $rs->L_Biblia;
+                            $faca1 = $rs->Faca_01;
+                            $faca2 = $rs->Faca_02;
+                            $faca3 = $rs->Faca_03;
+                            $faca4 = $rs->Faca_04;
+                            $vida1 = $rs->Vida_01;
+                            $vida2 = $rs->Vida_02;
+                            $vida3 = $rs->Vida_03;
+                            $dirigente = $rs->Dirigente_EBC;
+                            $leitor_ebc = $rs->Leitor_EBC;
+                        }
+                    } else {
+                        echo "Erro: Não foi possível recuperar os dados do banco de dados";
                     }
-                } else {
-                    echo "Erro: Não foi possível recuperar os dados do banco de dados";
-                }
+                }else{
+                    //Se não tiver, coloque tudo em branco.
+                        $presidente = "";
+                        $orador = "";
+                        $tema = "";
+                        $leitor = "";
+                        $tesouro = "";
+                        $joias = "";
+                        $l_biblia = "";
+                        $faca1 = "";
+                        $faca2 = "";
+                        $faca3 = "";
+                        $faca4 = "";
+                        $vida1 = "";
+                        $vida2 = "";
+                        $vida3 = "";
+                        $dirigente = "";
+                        $leitor_ebc = "";
+                } 
             } catch (PDOException $erro) {
                 echo "Erro: " . $erro->getMessage();
             }
-            // DESIGNÇÕES - FIM
         ?>
         <section id="Tesouros">
             <table class="tabela-cabecalho">
