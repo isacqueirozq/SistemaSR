@@ -22,7 +22,26 @@ require_once("src/Comandos.php");
             text-align: center;
             font-size: 12pt;
         }
+        a[type=btn]{
+            background-color: tomato;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            text-align: center;
+            font-size: 0.8em;
+            text-decoration: none;
+        }
+
+        a[type=btn]:hover{
+            background-color: #FF7359;
+        }
+
         @media screen and (max-width:350px) {
+            /* Esconde uma coluna quando está no celular */
             .col_link,.col_hora{
                 display: none;
             }
@@ -60,6 +79,7 @@ require_once("src/Comandos.php");
                 <label for="hora">Hora</label>
                 <input type="time" name="hora" id="hora" required>
                 <input type="submit" value="Gravar e Fixar no Quadro">
+                <a type="btn" href="gerenciamento.html">Voltar</a>
             </form>
         </div>
         

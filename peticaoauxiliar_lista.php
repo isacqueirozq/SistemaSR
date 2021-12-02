@@ -46,7 +46,7 @@
     <th>Mês/Ano</th>
   </tr>
     <?php
-            require_once("src/Carrega_dados.php");
+            require_once("src/ConexaoBD.php");
             // Data correta ----------------------------------------------------
             setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
             date_default_timezone_set('America/Sao_Paulo');
