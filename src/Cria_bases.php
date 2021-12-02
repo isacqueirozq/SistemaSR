@@ -2,12 +2,12 @@
 require_once("ConexaoBD.php");
 try {
     $conn->exec("set names utf8");
-    //VERIFICANDO BASES E SUAS TABELAS
+        //VERIFICANDO BASES E SUAS TABELAS
         $databases = "SistemaSR"; 
         $existe = $conn->query("SHOW DATABASES LIKE '$databases'")->rowCount() > 0;
         if ($existe > 0) {
             //VERIFICA TODAS AS TABELAS
-            $myTables = array("USUARIOS", "ASSISTENCIA", "DESIGNACOES", "NOTICIAS", "PETICAO_AUXILIAR", "RELATORIO_CAMPO", "SAIDA_CAMPO", "CONFIGURACOES");
+            $myTables = array("USUARIOS", "ASSISTENCIA", "DESIGNACOES", "NOTICIAS","EVENTOS", "PETICAO_AUXILIAR", "RELATORIO_CAMPO", "SAIDA_CAMPO", "CONFIGURACOES");
             $contaTabelas = count($myTables);
             echo $databases ."<br>"; 
             for ($x = 0; $x < $contaTabelas; $x++) {
@@ -86,6 +86,17 @@ try {
                                 Texto text NOT NULL,
                                 Data_Postagem date NOT NULL,
                                 Data_Retirada date NOT NULL
+                                )";
+                            $conn->exec($sql);
+                        break;
+
+                        case "EVENTOS":
+                            //==== CRIA TABELA ==== EVENTOS
+                            $sql = "CREATE TABLE IF NOT EXISTS EVENTOS (
+                                ID int(11) AUTO_INCREMENT PRIMARY KEY,
+                                Nome_do_evento varchar(50) NOT NULL,
+                                Data_do_evento date,
+                                Local_do_evento text
                                 )";
                             $conn->exec($sql);
                         break;
@@ -205,6 +216,15 @@ try {
                             Texto text NOT NULL,
                             Data_Postagem date NOT NULL,
                             Data_Retirada date NOT NULL
+                            )";
+            $conn->exec($sql);
+
+            //==== CRIA TABELA ==== EVENTOS
+            $sql = "CREATE TABLE IF NOT EXISTS EVENTOS (
+                            ID int(11) AUTO_INCREMENT PRIMARY KEY,
+                            Nome_do_evento varchar(50) NOT NULL,
+                            Data_do_evento date,
+                            Local_do_evento text
                             )";
             $conn->exec($sql);
 

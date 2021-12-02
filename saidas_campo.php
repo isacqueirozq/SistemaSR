@@ -83,7 +83,7 @@ require_once("src/Comandos.php");
                 <th class='col_link'>Link</th>
             </tr>
             <?php
-                require_once("src/Carrega_dados.php");
+                require_once("src/ConexaoBD.php");
                 $dia_da_semana;
                 $semana_do_mes;
                 try {

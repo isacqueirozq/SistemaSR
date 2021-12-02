@@ -25,6 +25,8 @@ function sabado()
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/tabela.css">
 
     <link rel="shortcut icon" href="Terno.ico" type="image/x-icon">
     <title>Sistema SR</title>
@@ -118,6 +120,16 @@ function sabado()
             <input type="date" name="postagem" id="postagem" required>
             <input type="date" name="retirada" id="retirada" required>
             <textarea name="texto" id="texto" cols="30" rows="10" placeholder="Conteúdo" required></textarea>
+            <input type="submit" value="Salvar">
+        </form>
+        <br>
+    </section>
+    <section hidden>
+        <!-- EVENTOS -->
+            <form action="?act=Salvar_EVENTOS" method="POST" name="Eventos">
+            <input type="text" name="Nome_do_evento" id="Nome_do_evento" placeholder="Nome do Evento" required>
+            <input type="date" name="Data_do_evento" id="Data_do_evento" placeholder="Data">
+            <input type="text" name="Local_do_evento" id="Local_do_evento">
             <input type="submit" value="Salvar">
         </form>
         <br>
@@ -397,11 +409,82 @@ function sabado()
                     <li><a href="relatorio_enviar.php">Relatório de Serviço de Campo</a></li>
                     <li><a href="peticaoauxiliar_enviar.php">Enviar Petição de P. Auxiliar </a></li>
                     <li><a href="saidas_campo_lista.php">Saídas de Campo</a></li>
-                    <li class="small"><a href="login.php">Entrar</a><a href="#0">Eventos</a></li>
+                    <li class="small">
+                        <a href="login.php">Entrar</a>
+                        <a href="#0" id="myBtn" onclick="">Eventos</a>
+                    </li>
                 </ul>
             </div>
         </div>
 
+        <section>
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>Eventos</h2>
+                    </div>
+                    <div class="modal-body">
+                    <table id="table" style="background:white;">
+                        <tr>
+                            <!-- <th>Eventos</th> 
+                            <th>Data</th>
+                            <th>Local</th>-->
+                        </tr>
+                        <?php
+                            try {
+                                $stmt = $conn->prepare("SELECT * FROM EVENTOS WHERE Data_do_evento > CURRENT_DATE() ORDER BY Data_do_evento ASC");
+                                
+                                if ($stmt->execute()) {
+                                    while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+                                        $id = $rs->ID;
+                                        $nome = $rs->Nome_do_evento;
+                                        $bddata = $rs->Data_do_evento;
+                                        setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+                                        $data = strftime("%d de %B de %Y", strtotime($bddata));
+                                        $local = $rs->Local_do_evento;
+                                        
+                                        echo "<tr>
+                                                <td>".$nome."</td>
+                                                <td>".$data."</td>
+                                                <td>".$local."</td>
+                                            </tr>";
+                                            //   <td><a class='delete' title='Apagar' href=\"?act=Deletar_EVENTOS&id=".$id."\"><i class='material-icons'>&#xE872;</i></a></td>
+                                    }
+                                } else {
+                                    echo "Erro: Não foi possível recuperar os dados do banco de dados";
+                                }
+                            } catch (PDOException $erro) {
+                                echo "Erro: " . $erro->getMessage();
+                            }
+                        ?>
+                    </table>
+                    </div>
+                    <div class="modal-footer">
+                        <h3></h3>
+                    </div>
+                </div>
+            </div>
+            <!-- Eventos -->
+                <script>
+                    var modal = document.getElementById("myModal");
+                    var btn = document.getElementById("myBtn");
+                    var span = document.getElementsByClassName("close")[0];
+                    btn.onclick = function() {
+                    modal.style.display = "block";
+                    }
+                    span.onclick = function() {
+                    modal.style.display = "none";
+                    }
+                    window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                    }
+                </script>
+        </section>
+                
+                
         <main>
             <div class="content">
                 <h2>Quadro de Anúncios <span><br> Cong. Santo Antônio dos Lopes</span></h2>

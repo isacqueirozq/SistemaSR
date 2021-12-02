@@ -288,6 +288,89 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Deletar_$tabela" && $id != "
 
 
 //----------------------
+// Tabela: EVENTOS
+//----------------------
+$tabela = "EVENTOS";
+$id = (isset($_POST["id"]) && $_POST["id"] != null) ? $_POST["id"] : "";
+$nome = (isset($_POST["Nome_do_evento"]) && $_POST["Nome_do_evento"] != null) ? $_POST["Nome_do_evento"] : "";
+$data = (isset($_POST["Data_do_evento"]) && $_POST["Data_do_evento"] != null) ? $_POST["Data_do_evento"] : "";
+$local = (isset($_POST["Local_do_evento"]) && $_POST["Local_do_evento"] != null) ? $_POST["Local_do_evento"] : "";
+
+// ------- Salvar -------
+if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Salvar_$tabela" && $nome != "") {
+    try {
+        if ($id != "") {
+            $stmt = $conn->prepare("UPDATE $tabela SET Nome_do_evento = ?, Data_do_evento = ?, Local_do_evento = ? WHERE id = ?");
+            $stmt->bindParam(4, $id);
+        } else {
+            $stmt = $conn->prepare("INSERT INTO $tabela (Nome_do_evento, Data_do_evento, Local_do_evento) VALUES (?,?,?)");
+        }
+        $stmt->bindParam(1, $nome);
+        $stmt->bindParam(2, $data);
+        $stmt->bindParam(3, $local);
+        if ($stmt->execute()) {
+            if ($stmt->rowCount() > 0) {
+                echo "Gravado com sucesso!";
+                $nome = null;
+                $data = null;
+                $local = null;
+            ?>
+                <script type="text/javascript">
+                    window.open('evento_editar.php', '_self');
+                </script>
+            <?php
+            } else {
+                echo "Erro ao tentar efetivar cadastro";
+            }
+        }
+    } catch (PDOException $erro) {
+        echo "Erro: " . $erro->getMessage();
+    }
+}
+// ------ Atualizar ------
+if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Atualizar_$tabela" && $id != "") {
+    try {
+        $stmt = $conexao->prepare("SELECT * FROM $tabela WHERE id = ?");
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            $rs = $stmt->fetch(PDO::FETCH_OBJ);
+            // $id = $rs->id;
+            // $data = $rs->Data;
+            // $quantidade = $rs->Quantidade;
+        } else {
+            throw new PDOException("Erro: Não foi possível executar a declaração sql");
+        }
+    } catch (PDOException $erro) {
+        echo "Erro: " . $erro->getMessage();
+    }
+}
+// ------ Delete ---------
+
+if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Deletar_$tabela" && $id != "") {
+    echo $id;
+    try {
+        $stmt = $conexao->prepare("DELETE FROM $tabela WHERE id = ?");
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            echo "Registo foi excluído com êxito";
+            $id = null;
+        } else {
+            throw new PDOException("Erro: Não foi possível executar a declaração sql");
+        }
+    } catch (PDOException $erro) {
+        echo "Erro: " . $erro->getMessage();
+    }
+}
+
+
+
+
+//###############################################################################
+
+
+
+
+//----------------------
 // Tabela: PIONEIRO AUXILIAR
 //----------------------
 $tabela = "PETICAO_AUXILIAR";

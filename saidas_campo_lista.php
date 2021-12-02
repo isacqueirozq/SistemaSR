@@ -159,7 +159,7 @@ function qtd_fimdesemana(){
 function t($dia){
     $nsemana_sabado = qtd_fimdesemana()[0];//Mês tem 4 ou 5 semanas
     $nsemana_domingo = qtd_fimdesemana()[1];//Mês tem 4 ou 5 semanas
-    require("src/Carrega_dados.php");
+    require("src/ConexaoBD.php");
     try {     
             //Caso não seja sábado e domingo       
             if ($dia != 1 || $dia != 7) {
@@ -279,7 +279,7 @@ function mostrar($dia, $semana){
     */
 
     //Necessários
-    require_once("src/Carrega_dados.php");
+    require_once("src/ConexaoBD.php");
     setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
     date_default_timezone_set('America/Sao_Paulo');
 
