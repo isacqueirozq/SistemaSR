@@ -3,7 +3,13 @@ require_once("ConexaoBD.php");
 try {
     $conn->exec("set names utf8");
         //VERIFICANDO BASES E SUAS TABELAS
+
+        //online
+        //$databases = "id16024105_sistemasr";
+        //localhost
         $databases = "SistemaSR"; 
+
+
         $existe = $conn->query("SHOW DATABASES LIKE '$databases'")->rowCount() > 0;
         if ($existe > 0) {
             //VERIFICA TODAS AS TABELAS
@@ -140,7 +146,7 @@ try {
         else
         {
             //### CRIA BASE DE DADOS ###
-            $sql = "CREATE DATABASE IF NOT EXISTS SistemaSR";
+            $sql = "CREATE DATABASE IF NOT EXISTS '$databases'";
             $conn->exec($sql);
             $sql = "use " . $databases . "";
             $conn->exec($sql);
