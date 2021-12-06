@@ -94,7 +94,7 @@ require_once("src/ConexaoBD.php");
                             $id = $rs->ID;
                             $nome = $rs->Nome_do_evento;
                             $bddata = $rs->Data_do_evento;
-                            setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+                            setlocale(LC_ALL,'pt_BR.utf-8');
                             $data = strftime("%d de %B de %Y", strtotime($bddata));
                             $local = $rs->Local_do_evento;
                             

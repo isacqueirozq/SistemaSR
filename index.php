@@ -34,7 +34,7 @@ function sabado()
 
 <body>
     <!-- Assitência -->
-    <section id="1" hidden>
+    <!-- <section id="1" hidden>
         <h3>Assistência das Reuniões</h3>
         <form action="?act=Salvar_ASSISTENCIA" method="POST" name="Assitencia">
             <input type="date" name="data" id="data" required>
@@ -42,7 +42,7 @@ function sabado()
             <input type="submit" value="Salvar">
         </form>
         <br>
-    </section>
+    </section> -->
     <!-- Designações -->
     <section id="2" hidden>
         <script>
@@ -112,7 +112,7 @@ function sabado()
         <br>
     </section>
     <!-- Noticias -->
-    <section id="3" hidden>
+    <!-- <section id="3" hidden>
         <h3>Notícias Locais e Anúncios</h3>
         <form action="?act=Salvar_NOTICIAS" method="POST" name="Noticias">
             <input type="text" name="titulo" id="titulo" placeholder="Título" required>
@@ -123,9 +123,9 @@ function sabado()
             <input type="submit" value="Salvar">
         </form>
         <br>
-    </section>
-    <section hidden>
-        <!-- EVENTOS -->
+    </section> -->
+    <!-- EVENTOS -->
+    <!-- <section hidden>
             <form action="?act=Salvar_EVENTOS" method="POST" name="Eventos">
             <input type="text" name="Nome_do_evento" id="Nome_do_evento" placeholder="Nome do Evento" required>
             <input type="date" name="Data_do_evento" id="Data_do_evento" placeholder="Data">
@@ -133,9 +133,9 @@ function sabado()
             <input type="submit" value="Salvar">
         </form>
         <br>
-    </section>
+    </section> -->
     <!-- Petição de Auxiliar -->
-    <section id="4" hidden>
+    <!-- <section id="4" hidden>
         <h3>Petição de Pioneiro Auxiliar</h3>
         <form action="?act=Salvar_PETICAO_AUXILIAR" method="POST" name="Pioneiro_Auxiliar">
             <input type="text" name="nome" id="nome" placeholder="Nome Completo" required>
@@ -162,7 +162,7 @@ function sabado()
             <input type="submit" value="Enviar Petição para os Anciãos">
         </form>
         <br>
-    </section>
+    </section> -->
     <!-- Relatório de Serviço de Campo -->
     <section id="5" hidden>
         <h3>Relatório de Seviço de Campo</h3>
@@ -218,7 +218,7 @@ function sabado()
         <br>
     </section>
     <!-- SAIDAS DE CAMPO -->
-    <section id="6" hidden>
+    <!-- <section id="6" hidden>
         <h3>Saídas de Campo</h3>
         <form action="?act=Salvar_SAIDA_CAMPO" method="POST" name="Saida_Campo">
             <select name="dia_Semana" id="dia_Semana" required>
@@ -239,16 +239,15 @@ function sabado()
                 <option value="4">4° Semena do mês</option>
                 <option value="5">5° Semana do mês</option>
             </select>
-            <!-- <input type="text" name="semana_do_mes" id="semana_do_mes" placeholder="Semana do mês"> -->
             <input type="text" name="dirigente" id="dirigente" placeholder="Nome do Dirigente" required>
             <input type="text" name="link" id="link" placeholder="Link" required>
             <input type="time" name="hora" id="hora" required>
             <input type="submit" value="Gravar e Fixar no Quadro">
         </form>
         <br>
-    </section>
+    </section> -->
     <!-- USUARIOS -->
-    <section id="7" hidden>
+    <!-- <section id="7" hidden>
         <h3>Usuários</h3>
         <form action="?act=Salvar_USUARIOS" method="POST" name="Usuarios">
             Usuário:<input type="text" name="user" id="user" placeholder="Nome de Acesso" required>
@@ -266,11 +265,10 @@ function sabado()
             <input type="submit" value="Cadastrar">
         </form>
         <br>
-    </section>
-    <!-- Menu -->
+    </section> -->
+    <!-- Menu vertical -->
     <section id="8" hidden>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
         <a href="#" class="card education">
             <div class="overlay"></div>
             <div class="circle">
@@ -307,7 +305,6 @@ function sabado()
             </div>
             <p>Education</p>
         </a>
-
         <a href="#" class="card credentialing">
             <div class="overlay"></div>
             <div class="circle">
@@ -343,7 +340,6 @@ function sabado()
             </div>
             <p>Credentialing</p>
         </a>
-
         <a href="#" class="card wallet">
             <div class="overlay"></div>
             <div class="circle">
@@ -366,7 +362,6 @@ function sabado()
             </div>
             <p>Wallet</p>
         </a>
-
         <a href="#" class="card human-resources">
             <div class="overlay"></div>
             <div class="circle">
@@ -387,8 +382,6 @@ function sabado()
             <p>Human Resources</p>
         </a>
     </section>
-
-
 
     <!-- ############################################################################ -->
 
@@ -440,7 +433,7 @@ function sabado()
                                         $id = $rs->ID;
                                         $nome = $rs->Nome_do_evento;
                                         $bddata = $rs->Data_do_evento;
-                                        setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+                                        setlocale(LC_ALL,'pt_BR.utf-8');
                                         $data = strftime("%d de %B de %Y", strtotime($bddata));
                                         $local = $rs->Local_do_evento;
                                         

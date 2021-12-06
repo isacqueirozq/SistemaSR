@@ -1,0 +1,96 @@
+/* CSS DA TABELA */
+
+/* Conteúdo */
+.conteudo {
+    margin-bottom: 30px;
+}
+
+/* Cabeçalho */
+.tabela-cabecalho {
+    width: 100%;
+}
+
+.cabecalho {
+    width: 100%;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 #444;
+    font: bold;
+    color: white;
+    padding-left: 2%;
+}
+
+
+.tesouro {
+    background-color: #999999;
+}
+
+.faca {
+    background-color: #f1c232;
+}
+
+.vida {
+    background-color: #a61c00;
+}
+
+.publica {
+    background-color: #26618e;
+}
+
+/*######## */
+/*  Itens  */
+/*######## */
+.tabela-item {
+    width: 100%;
+}
+
+.itens {
+    padding-left: 2%;
+}
+
+.dado {
+    text-align: center;
+}
+
+.tabela-item td {
+    width: 50%;
+}
+
+/* ############################# */
+/* Data da semana - Cabecalho    */
+/* ############################# */
+header {
+    text-align: center;
+    font-size: 1.3em;
+    padding: 10px;
+    color: white;
+    background-color: rgba(0, 59, 107, 0.575);
+    text-shadow: 1px 1px 0 #444;
+    margin-bottom: 5px;
+}
+
+/* ############################# */
+/* Reunião fim de semana    */
+/* ############################# */
+.tema {
+    font-size: 1.3em;
+}
+
+.caixatema {
+    padding: 2%;
+}
+
+.publica-frame {
+    background-color: rgb(217, 217, 217);
+    padding: 2%;
+    width: 100%;
+}
+
+/* @media screen and(min-width:400px){
+            .cabecalho{
+                font-size: 1.3em;
+            }
+            header {
+                font-size: 1.3em;
+            }
+} */
