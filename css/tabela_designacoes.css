@@ -55,6 +55,9 @@
 .tabela-item td {
     width: 50%;
 }
+.tabela-item-publica td {
+    width: 100%;
+}
 
 /* ############################# */
 /* Data da semana - Cabecalho    */
@@ -78,6 +81,7 @@ header {
 
 .caixatema {
     padding: 2%;
+    word-break: break-word;
 }
 
 .publica-frame {

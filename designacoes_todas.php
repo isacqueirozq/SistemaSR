@@ -80,6 +80,22 @@
         background-color: #717171;
         }
 
+        .footer{
+            text-align: center;
+            margin: auto;
+            background-color:#53524f ;
+            padding: 15px;
+            margin-left: 25px;
+            margin-right: 25px;
+            
+        }
+        a{
+            text-decoration: none;
+            font-weight: bold;
+            color: rgb(243, 233, 215);
+            
+        }
+
        @media screen and (min-width:500px){
             .mySlides{
                 width: 80%;
@@ -89,14 +105,17 @@
                 width: 76.5%;
                 margin: auto;
             }
+            .footer{
+                width: 76.5%;
+                margin: auto;
+            }
         }
 
     </style>
 </head>
 <body>
-  
+    
     <div class="slideshow-container">
-
         <div class="conteudo">
             <?php
                 // #####################
@@ -150,6 +169,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    
                                     <table class='tabela-item'>
                                         <tbody>
                                             <tr>
@@ -315,18 +335,23 @@
 
         <div class="dot-container">
             <?php
-            try {
-                $qtd = $conn->query("SELECT * FROM DESIGNACOES WHERE Data >= CURRENT_DATE() AND Reuniao = 0")->rowCount();
-                for ($i=1; $i <= $qtd; $i++) { 
-                   echo "<span class='dot' onclick='currentSlide(".$i.")'></span>";
+                try {
+                    $qtd = $conn->query("SELECT * FROM DESIGNACOES WHERE Data >= CURRENT_DATE() AND Reuniao = 0")->rowCount();
+                    for ($i=1; $i <= $qtd; $i++) { 
+                    echo "<span class='dot' onclick='currentSlide(".$i.")'></span>";
+                    }
+                } catch (PDOException $erro) {
+                    echo "Erro: " . $erro->getMessage();
                 }
-            } catch (PDOException $erro) {
-                echo "Erro: " . $erro->getMessage();
-            }
             ?>
+        </div>   
+
+        <div class="footer">
+            <a href="designacoes_todas_discursos.php">Ver próximos discursos</a>
         </div>
     </div><!-- Slide-->
-
+    
+    
     <script>
         var slideIndex = 1;
         showSlides(slideIndex);
@@ -355,7 +380,5 @@
         dots[slideIndex-1].className += " active";
         }
     </script>
-
-
 </body>
 </html>
