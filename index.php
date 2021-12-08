@@ -402,9 +402,9 @@ function sabado()
                     <li><a href="relatorio_enviar.php">Relatório de Serviço de Campo</a></li>
                     <li><a href="peticaoauxiliar_enviar.php">Enviar Petição de P. Auxiliar </a></li>
                     <li><a href="saidas_campo_lista.php">Saídas de Campo</a></li>
+                    <li><a href="#" id="myBtn">Eventos</a></li>
                     <li class="small">
                         <a href="login.php">Entrar</a>
-                        <a href="#0" id="myBtn" onclick="">Eventos</a>
                     </li>
                 </ul>
             </div>
@@ -418,31 +418,31 @@ function sabado()
                         <h2>Eventos</h2>
                     </div>
                     <div class="modal-body">
-                    <table id="table" style="background:white;">
-                        <tr>
-                            <!-- <th>Eventos</th> 
+                        <table id="table" style="background:white;">
+                            <tr>
+                                <!-- <th>Eventos</th> 
                             <th>Data</th>
                             <th>Local</th>-->
-                        </tr>
-                        <?php
+                            </tr>
+                            <?php
                             try {
                                 $stmt = $conn->prepare("SELECT * FROM EVENTOS WHERE Data_do_evento > CURRENT_DATE() ORDER BY Data_do_evento ASC");
-                                
+
                                 if ($stmt->execute()) {
                                     while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
                                         $id = $rs->ID;
                                         $nome = $rs->Nome_do_evento;
                                         $bddata = $rs->Data_do_evento;
-                                        setlocale(LC_ALL,'pt_BR.utf-8');
+                                        setlocale(LC_ALL, 'pt_BR.utf-8');
                                         $data = strftime("%d de %B de %Y", strtotime($bddata));
                                         $local = $rs->Local_do_evento;
-                                        
+
                                         echo "<tr>
-                                                <td>".$nome."</td>
-                                                <td>".$data."</td>
-                                                <td>".$local."</td>
+                                                <td>" . $nome . "</td>
+                                                <td>" . $data . "</td>
+                                                <td>" . $local . "</td>
                                             </tr>";
-                                            //   <td><a class='delete' title='Apagar' href=\"?act=Deletar_EVENTOS&id=".$id."\"><i class='material-icons'>&#xE872;</i></a></td>
+                                        //   <td><a class='delete' title='Apagar' href=\"?act=Deletar_EVENTOS&id=".$id."\"><i class='material-icons'>&#xE872;</i></a></td>
                                     }
                                 } else {
                                     echo "Erro: Não foi possível recuperar os dados do banco de dados";
@@ -450,8 +450,8 @@ function sabado()
                             } catch (PDOException $erro) {
                                 echo "Erro: " . $erro->getMessage();
                             }
-                        ?>
-                    </table>
+                            ?>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <h3></h3>
@@ -459,25 +459,25 @@ function sabado()
                 </div>
             </div>
             <!-- Eventos -->
-                <script>
-                    var modal = document.getElementById("myModal");
-                    var btn = document.getElementById("myBtn");
-                    var span = document.getElementsByClassName("close")[0];
-                    btn.onclick = function() {
+            <script>
+                var modal = document.getElementById("myModal");
+                var btn = document.getElementById("myBtn");
+                var span = document.getElementsByClassName("close")[0];
+                btn.onclick = function() {
                     modal.style.display = "block";
-                    }
-                    span.onclick = function() {
+                }
+                span.onclick = function() {
                     modal.style.display = "none";
-                    }
-                    window.onclick = function(event) {
+                }
+                window.onclick = function(event) {
                     if (event.target == modal) {
                         modal.style.display = "none";
                     }
-                    }
-                </script>
+                }
+            </script>
         </section>
-                
-                
+
+
         <main>
             <div class="content">
                 <h2>Quadro de Anúncios <span><br> Cong. Santo Antônio dos Lopes</span></h2>
