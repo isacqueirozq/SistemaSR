@@ -23,6 +23,18 @@ function sabado()
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="css/botoes_Menu.css"> -->
     <meta charset="UTF-8">
+
+    <meta property="og:title" content="Cong. Sto Antônio dos Lopes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1">
+    <meta property="og:image" content="img/Terno.png">
+    <meta property="og:image:type" content="img/Terno.png">
+    <meta property="og:image:width" content="60">
+    <meta property="og:image:height" content="60">
+    <meta property="og:url" content="https://abre.ai/quadrocongsal" />
+    <meta property="og:site_name" content="Sistema para Salão do Reino"/>
+    <meta property="og:description" content="Envie seu relatório de campo, petição de Pioneiro Auxiliar ou veja as designações da Reunião"/>
+    <meta property="og:type" content="article" />
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/modal.css">

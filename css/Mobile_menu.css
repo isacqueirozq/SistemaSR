@@ -169,9 +169,10 @@ main small {
 }
 
 .small a {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
-  color: #888;
+  color: rgb(44, 43, 43);
+  background-color: #f8d6e6;
 }
 .small a + a {
   margin-left: 15px;
