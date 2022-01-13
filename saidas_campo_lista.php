@@ -361,29 +361,29 @@ function mostrar($dia, $semana){
                 <!-- VISOR -->
                 <div id="display">
                     <?php
-                    function padrao($dia){
-                        if ($dia == "") {
-                            $dia = date('N'); // 1 para segunda e 7 para domingo
+                        function padrao($dia){
+                            if ($dia == "") {
+                                $dia = date('N'); // 1 para segunda e 7 para domingo
+                            }
+                        
+                            $today = date('N')+1;
+                            if ($dia == $today) {
+                                echo "<p class='caption-container'>HOJE</p>";
+                            }
+                            $dado = t($dia);
+                            echo "<h4 class='mb-0'>".$dado[0]."</h4> <small class='text-muted mb-3'>Dirigente</small>
+                            <small>
+                                <h5>".$dado[1]."</h5>
+                            </small>
+                            <h2 class='large-font'>".$dado[2]."</h2>
+                            <small>
+                                <a href='".$dado[3]."'>LINK DA CONSIDERAÇÃO VIA ZOOM</a>
+                            </small>
+                            <div class='text-center mt-3 mb-4'>
+                                <!-- informações -->
+                            </div>";
                         }
-                    
-                        $today = date('N')+1;
-                        if ($dia == $today) {
-                            echo "<p class='caption-container'>HOJE</p>";
-                        }
-                        $dado = t($dia);
-                        echo "<h4 class='mb-0'>".$dado[0]."</h4> <small class='text-muted mb-3'>Dirigente</small>
-                        <small>
-                            <h5>".$dado[1]."</h5>
-                        </small>
-                        <h2 class='large-font'>".$dado[2]."</h2>
-                        <small>
-                            <a href='".$dado[3]."'>LINK DA CONSIDERAÇÃO VIA ZOOM</a>
-                        </small>
-                        <div class='text-center mt-3 mb-4'>
-                            <!-- informações -->
-                        </div>";
-                    }
-                    // padrao(0);
+                        // padrao(0);
                     ?>
                     <!-- **** Slide ***  -->
                     <style>

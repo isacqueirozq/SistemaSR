@@ -277,12 +277,14 @@ require_once("src/Comandos.php");
                         var hoje = new Date();
                         var ano = hoje.getFullYear();
                         var anoNovo = ano - 1;
+                        var mesAtual = hoje.getMonth() + 1;
+                        
                         $(document).ready(function() {
                             $("#mesdoano").change(function() {
                                 var mes = $("#anorel").val($("#mesdoano").val());
-                                if (mes.val() == 12 & hoje.getMonth() == 1) {
+                                if (mes.val() == 12 & mesAtual == 1) {
                                     $("#anorel").val(anoNovo);
-                                } else if (mes.val() == 12 & hoje.getMonth() == 12) {
+                                } else if (mes.val() == 12 & mesAtual == 12) {
                                     $("#anorel").val(ano);
                                 } else {
                                     $("#anorel").val(ano);
