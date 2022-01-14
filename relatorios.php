@@ -121,10 +121,19 @@
 
 
             try {
-                $stmt = $conn->prepare("SELECT 
-                                            COUNT(Nome) AS rel_total
-                                            FROM RELATORIO_CAMPO 
-                                            WHERE Mes = $mes");
+                if ($mes > 0) {
+                    $stmt = $conn->prepare("SELECT 
+                                        COUNT(Nome) AS rel_total
+                                        FROM RELATORIO_CAMPO 
+                                        WHERE Mes = $mes");
+                }else{
+                    $stmt = $conn->prepare("SELECT 
+                                        COUNT(Nome) AS rel_total
+                                        FROM RELATORIO_CAMPO 
+                                        WHERE Mes = 12 
+                                        AND Ano = $anoAnterior");
+                }
+                
                 if ($stmt->execute()) {
                     while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
                         $rel_total = $rs->rel_total;
@@ -157,6 +166,7 @@
             </script>
         </ul>
     </div>
+
     <!-- GERAL -->
     <a href="relatorio_lista_todos.php">
         <div class="columns menor">
@@ -169,7 +179,8 @@
                 // # Congregação #
                 // ###############
                 try {
-                    $stmt = $conn->prepare("SELECT 
+                    if ($mes > 0) {
+                        $stmt = $conn->prepare("SELECT 
                                             SUM(Publicacoes) AS pub_total, 
                                             TRUNCATE(AVG(Publicacoes),1) AS pub_med,
                                             SUM(Videos) AS vid_total, 
@@ -183,6 +194,24 @@
                                             COUNT(Nome) AS total
                                             FROM RELATORIO_CAMPO 
                                             WHERE Mes = $mes");
+                    } else{
+                        $stmt = $conn->prepare("SELECT 
+                                            SUM(Publicacoes) AS pub_total, 
+                                            TRUNCATE(AVG(Publicacoes),1) AS pub_med,
+                                            SUM(Videos) AS vid_total, 
+                                            TRUNCATE(AVG(Videos),1) AS vid_med,
+                                            SUM(Horas) AS hrs_total, 
+                                            TRUNCATE(AVG(Horas),1) AS hrs_med,
+                                            SUM(Revisitas) AS rev_total, 
+                                            TRUNCATE(AVG(Revisitas),1) AS rev_med,
+                                            SUM(Estudos) AS est_total, 
+                                            TRUNCATE(AVG(Estudos),1) AS est_med,
+                                            COUNT(Nome) AS total
+                                            FROM RELATORIO_CAMPO 
+                                            WHERE Mes = 12 
+                                            AND Ano = $anoAnterior");
+                    }
+                    
                     if ($stmt->execute()) {
                         while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
                             $pub_total = $rs->pub_total;
@@ -221,6 +250,7 @@
             </ul>
         </div>
     </a>
+
     <!-- PUBLICADORES -->
     <a href="relatorio_lista_publicadores.php">
         <div class="columns menor">
@@ -233,21 +263,40 @@
                 // # PUBLICADORES #
                 // ###############
                 try {
-                    $stmt = $conn->prepare("SELECT 
-                                                SUM(Publicacoes) AS pub_total, 
-                                                TRUNCATE(AVG(Publicacoes),1) AS pub_med,
-                                                SUM(Videos) AS vid_total, 
-                                                TRUNCATE(AVG(Videos),1) AS vid_med,
-                                                SUM(Horas) AS hrs_total, 
-                                                TRUNCATE(AVG(Horas),1) AS hrs_med,
-                                                SUM(Revisitas) AS rev_total, 
-                                                TRUNCATE(AVG(Revisitas),1) AS rev_med,
-                                                SUM(Estudos) AS est_total, 
-                                                TRUNCATE(AVG(Estudos),1) AS est_med,
-                                                COUNT(Nome) AS total
-                                                FROM RELATORIO_CAMPO 
-                                                WHERE Mes = $mes
-                                                AND Pioneiro = 0");
+                    if ($mes > 0) {
+                        $stmt = $conn->prepare("SELECT 
+                                                    SUM(Publicacoes) AS pub_total, 
+                                                    TRUNCATE(AVG(Publicacoes),1) AS pub_med,
+                                                    SUM(Videos) AS vid_total, 
+                                                    TRUNCATE(AVG(Videos),1) AS vid_med,
+                                                    SUM(Horas) AS hrs_total, 
+                                                    TRUNCATE(AVG(Horas),1) AS hrs_med,
+                                                    SUM(Revisitas) AS rev_total, 
+                                                    TRUNCATE(AVG(Revisitas),1) AS rev_med,
+                                                    SUM(Estudos) AS est_total, 
+                                                    TRUNCATE(AVG(Estudos),1) AS est_med,
+                                                    COUNT(Nome) AS total
+                                                    FROM RELATORIO_CAMPO 
+                                                    WHERE Mes = $mes
+                                                    AND Pioneiro = 0");
+                    } else{
+                        $stmt = $conn->prepare("SELECT 
+                                                    SUM(Publicacoes) AS pub_total, 
+                                                    TRUNCATE(AVG(Publicacoes),1) AS pub_med,
+                                                    SUM(Videos) AS vid_total, 
+                                                    TRUNCATE(AVG(Videos),1) AS vid_med,
+                                                    SUM(Horas) AS hrs_total, 
+                                                    TRUNCATE(AVG(Horas),1) AS hrs_med,
+                                                    SUM(Revisitas) AS rev_total, 
+                                                    TRUNCATE(AVG(Revisitas),1) AS rev_med,
+                                                    SUM(Estudos) AS est_total, 
+                                                    TRUNCATE(AVG(Estudos),1) AS est_med,
+                                                    COUNT(Nome) AS total
+                                                    FROM RELATORIO_CAMPO 
+                                                    WHERE Mes = 12 
+                                                    AND Ano = $anoAnterior
+                                                    AND Pioneiro = 0");
+                    }
                     if ($stmt->execute()) {
                         while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
                             $Ppub_total = $rs->pub_total;
@@ -286,6 +335,7 @@
             </ul>
         </div>
     </a>
+
     <!-- AUXILIARES -->
     <a href="relatorio_lista_auxiliares.php">
         <div class="columns menor">
@@ -298,21 +348,40 @@
                 // # PUBLICADORES #
                 // ###############
                 try {
-                    $stmt = $conn->prepare("SELECT 
-                                                SUM(Publicacoes) AS pub_total, 
-                                                TRUNCATE(AVG(Publicacoes),1) AS pub_med,
-                                                SUM(Videos) AS vid_total, 
-                                                TRUNCATE(AVG(Videos),1) AS vid_med,
-                                                SUM(Horas) AS hrs_total, 
-                                                TRUNCATE(AVG(Horas),1) AS hrs_med,
-                                                SUM(Revisitas) AS rev_total, 
-                                                TRUNCATE(AVG(Revisitas),1) AS rev_med,
-                                                SUM(Estudos) AS est_total, 
-                                                TRUNCATE(AVG(Estudos),1) AS est_med,
-                                                COUNT(Nome) AS total
-                                                FROM RELATORIO_CAMPO 
-                                                WHERE Mes = $mes
-                                                AND Pioneiro = 1");
+                    if ($mes > 0) {
+                        $stmt = $conn->prepare("SELECT 
+                                                    SUM(Publicacoes) AS pub_total, 
+                                                    TRUNCATE(AVG(Publicacoes),1) AS pub_med,
+                                                    SUM(Videos) AS vid_total, 
+                                                    TRUNCATE(AVG(Videos),1) AS vid_med,
+                                                    SUM(Horas) AS hrs_total, 
+                                                    TRUNCATE(AVG(Horas),1) AS hrs_med,
+                                                    SUM(Revisitas) AS rev_total, 
+                                                    TRUNCATE(AVG(Revisitas),1) AS rev_med,
+                                                    SUM(Estudos) AS est_total, 
+                                                    TRUNCATE(AVG(Estudos),1) AS est_med,
+                                                    COUNT(Nome) AS total
+                                                    FROM RELATORIO_CAMPO 
+                                                    WHERE Mes = $mes
+                                                    AND Pioneiro = 1");
+                    } else{
+                        $stmt = $conn->prepare("SELECT 
+                                                    SUM(Publicacoes) AS pub_total, 
+                                                    TRUNCATE(AVG(Publicacoes),1) AS pub_med,
+                                                    SUM(Videos) AS vid_total, 
+                                                    TRUNCATE(AVG(Videos),1) AS vid_med,
+                                                    SUM(Horas) AS hrs_total, 
+                                                    TRUNCATE(AVG(Horas),1) AS hrs_med,
+                                                    SUM(Revisitas) AS rev_total, 
+                                                    TRUNCATE(AVG(Revisitas),1) AS rev_med,
+                                                    SUM(Estudos) AS est_total, 
+                                                    TRUNCATE(AVG(Estudos),1) AS est_med,
+                                                    COUNT(Nome) AS total
+                                                    FROM RELATORIO_CAMPO 
+                                                    WHERE Mes = 12
+                                                    AND Ano = $anoAnterior
+                                                    AND Pioneiro = 1");
+                    }
                     if ($stmt->execute()) {
                         while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
                             $Apub_total = $rs->pub_total;
@@ -351,6 +420,7 @@
             </ul>
         </div>
     </a>
+
     <!-- REGULARES -->
     <a href="relatorio_lista_regulares.php">
         <div class="columns menor">
@@ -363,21 +433,40 @@
                 // # PUBLICADORES #
                 // ###############
                 try {
-                    $stmt = $conn->prepare("SELECT 
-                                                        SUM(Publicacoes) AS pub_total, 
-                                                        TRUNCATE(AVG(Publicacoes),1) AS pub_med,
-                                                        SUM(Videos) AS vid_total, 
-                                                        TRUNCATE(AVG(Videos),1) AS vid_med,
-                                                        SUM(Horas) AS hrs_total, 
-                                                        TRUNCATE(AVG(Horas),1) AS hrs_med,
-                                                        SUM(Revisitas) AS rev_total, 
-                                                        TRUNCATE(AVG(Revisitas),1) AS rev_med,
-                                                        SUM(Estudos) AS est_total, 
-                                                        TRUNCATE(AVG(Estudos),1) AS est_med,
-                                                        COUNT(Nome) AS total
-                                                        FROM RELATORIO_CAMPO 
-                                                        WHERE Mes = $mes
-                                                        AND Pioneiro IN ('2','3')");
+                    if ($mes > 0) {
+                        $stmt = $conn->prepare("SELECT 
+                                                SUM(Publicacoes) AS pub_total, 
+                                                TRUNCATE(AVG(Publicacoes),1) AS pub_med,
+                                                SUM(Videos) AS vid_total, 
+                                                TRUNCATE(AVG(Videos),1) AS vid_med,
+                                                SUM(Horas) AS hrs_total, 
+                                                TRUNCATE(AVG(Horas),1) AS hrs_med,
+                                                SUM(Revisitas) AS rev_total, 
+                                                TRUNCATE(AVG(Revisitas),1) AS rev_med,
+                                                SUM(Estudos) AS est_total, 
+                                                TRUNCATE(AVG(Estudos),1) AS est_med,
+                                                COUNT(Nome) AS total
+                                                FROM RELATORIO_CAMPO 
+                                                WHERE Mes = $mes
+                                                AND Pioneiro IN ('2','3')");
+                    } else{
+                        $stmt = $conn->prepare("SELECT 
+                                                SUM(Publicacoes) AS pub_total, 
+                                                TRUNCATE(AVG(Publicacoes),1) AS pub_med,
+                                                SUM(Videos) AS vid_total, 
+                                                TRUNCATE(AVG(Videos),1) AS vid_med,
+                                                SUM(Horas) AS hrs_total, 
+                                                TRUNCATE(AVG(Horas),1) AS hrs_med,
+                                                SUM(Revisitas) AS rev_total, 
+                                                TRUNCATE(AVG(Revisitas),1) AS rev_med,
+                                                SUM(Estudos) AS est_total, 
+                                                TRUNCATE(AVG(Estudos),1) AS est_med,
+                                                COUNT(Nome) AS total
+                                                FROM RELATORIO_CAMPO 
+                                                WHERE Mes = 12
+                                                AND Ano = $anoAnterior
+                                                AND Pioneiro IN ('2','3')");
+                    }
                     if ($stmt->execute()) {
                         while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
                             $Ppub_total = $rs->pub_total;
