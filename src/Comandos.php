@@ -488,7 +488,17 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "Salvar_$tabela" && $nome != 
             $stmt = $conn->prepare("UPDATE $tabela SET Nome = ?, Mes = ?, Ano = ?, Pioneiro =?,Publicacoes = ?, Videos = ?, Horas = ?, Revisitas = ?, Estudos = ?, Obs = ?  WHERE id = ?");
             $stmt->bindParam(11, $id);
         } else {
-            $stmt = $conn->prepare("INSERT INTO $tabela (Nome, Mes, Ano, Pioneiro, Publicacoes, Videos, Horas, Revisitas, Estudos, Obs) VALUES (?,?,?,?,?,?,?,?,?,?)");
+            if ($conn->query("select count(*) from $tabela where Nome = '{$nome}' AND Mes = '{$mes}' AND Ano = '{$ano}'")->fetchColumn() <= 0){
+                $stmt = $conn->prepare("INSERT INTO $tabela (Nome, Mes, Ano, Pioneiro, Publicacoes, Videos, Horas, Revisitas, Estudos, Obs) VALUES (?,?,?,?,?,?,?,?,?,?)");
+            } else{
+                ?><script type = "text/javascript" >
+                    var passaValor = function(valor) {
+                        window.location = "erro_duplicado.html?minhaVariavel=" + valor;
+                    }
+                    var pagina = 'relatorio_enviar.php';
+                    passaValor(pagina);
+                </script><?php
+            }
         }
         $stmt->bindParam(1, $nome);
         $stmt->bindParam(2, $mes);
